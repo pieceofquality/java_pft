@@ -1,4 +1,4 @@
-package com.pieceofquality.addressbook;
+package com.pieceofquality.addressbook.model;
 
 public class GroupData {
     private final String name;

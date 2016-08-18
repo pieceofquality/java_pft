@@ -1,5 +1,6 @@
-package com.pieceofquality.addressbook;
+package com.pieceofquality.addressbook.tests;
 
+import com.pieceofquality.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;

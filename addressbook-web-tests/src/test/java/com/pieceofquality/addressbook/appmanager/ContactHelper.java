@@ -37,10 +37,18 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact(){
-            click(By.xpath(".//*[@id='4']"));
+            click(By.cssSelector("#maintable input:nth-of-type(1)"));
     }
 
     public void deleteSelectedContact() {
-        click(By.xpath("delete"));
+        click(By.cssSelector("div.left:nth-child(8)"));
+    }
+
+    public void initContactModification() {
+        click(By.cssSelector(".center img[title=\"Edit\"]:nth-of-type(1)"));
+    }
+
+    public void submitContactMofication() {
+        click(By.cssSelector("[value=\"Update\"]"));
     }
 }

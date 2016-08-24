@@ -2,14 +2,14 @@ package com.pieceofquality.addressbook.appmanager;
 
 import com.pieceofquality.addressbook.model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by piece on 19.08.2016.
  */
 public class GroupHelper extends HelperBase {
 
-    public GroupHelper(FirefoxDriver wd) {
+    public GroupHelper(WebDriver wd) {
         super(wd);
     }
 

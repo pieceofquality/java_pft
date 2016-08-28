@@ -2,22 +2,17 @@ package com.pieceofquality.addressbook.model;
 
 public class ContactData {
     private final String firstName;
-    private final String middleName;
     private final String lastName;
     private String group;
 
-    public ContactData(String firstName, String middleName, String lastName) {
+    public ContactData(String firstName, String lastName, String group) {
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
+        this.group = group;
     }
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
     }
 
     public String getLastName() {

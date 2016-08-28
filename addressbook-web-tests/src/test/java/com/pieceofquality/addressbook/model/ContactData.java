@@ -4,29 +4,12 @@ public class ContactData {
     private final String firstName;
     private final String middleName;
     private final String lastName;
-    private final String nickname;
-    private final String title;
-    private final String company;
-    private final String address;
-    private final String home;
-    private final String mobile;
-    private final String work;
-    private final String fax;
-    private final String email;
+    private String group;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickname, String title, String company, String address, String home, String mobile, String work, String fax, String email) {
+    public ContactData(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.nickname = nickname;
-        this.title = title;
-        this.company = company;
-        this.address = address;
-        this.home = home;
-        this.mobile = mobile;
-        this.work = work;
-        this.fax = fax;
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -41,39 +24,7 @@ public class ContactData {
         return lastName;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getHome() {
-        return home;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public String getWork() {
-        return work;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getGroup() {
+        return group;
     }
 }

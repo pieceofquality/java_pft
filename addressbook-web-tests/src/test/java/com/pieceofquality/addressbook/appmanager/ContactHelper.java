@@ -2,8 +2,10 @@ package com.pieceofquality.addressbook.appmanager;
 
 import com.pieceofquality.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by piece on 21.08.2016.
@@ -22,15 +24,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
-        type(By.name("nickname"), contactData.getNickname());
-        type(By.name("title"), contactData.getTitle());
-        type(By.name("company"), contactData.getCompany());
-        type(By.name("address"), contactData.getAddress());
-        type(By.name("home"), contactData.getHome());
-        type(By.name("mobile"), contactData.getMobile());
-        type(By.name("work"), contactData.getWork());
-        type(By.name("fax"), contactData.getFax());
-        type(By.name("email"), contactData.getEmail());
+
+        if (isElementPresent(By.name("new_group"))) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        }
     }
 
     public void initContactCreation() {

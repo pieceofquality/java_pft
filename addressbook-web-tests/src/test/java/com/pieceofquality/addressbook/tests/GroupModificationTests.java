@@ -9,9 +9,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Created by piece on 21.08.2016.
- */
 public class GroupModificationTests extends TestBase{
 
     @Test

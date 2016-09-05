@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper extends HelperBase{
-    private WebDriver wd;
 
     public NavigationHelper(WebDriver wd) {
         super(wd);
@@ -21,7 +20,7 @@ public class NavigationHelper extends HelperBase{
         }
 
     public void returnToHomePage() {
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public void goToHomePage(){

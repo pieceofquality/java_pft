@@ -63,7 +63,7 @@ public class ContactHelper extends HelperBase {
 
     public void createContact(ContactData contact) {
         initContactCreation();
-        fillContactForm(new ContactData("First Name", "Last Name", "test_name"), true);
+        fillContactForm(contact, true);
         submitContactCreation();
         returnToHomePage();
     }
@@ -74,13 +74,19 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.contact"));
+        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(name, null, null);
+            String firstName = element.findElement(By.xpath("./td[3]")).getText();
+            String lastName = element.findElement(By.xpath("./td[2]")).getText();
+            ContactData contact = new ContactData(id, firstName, lastName, null);
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

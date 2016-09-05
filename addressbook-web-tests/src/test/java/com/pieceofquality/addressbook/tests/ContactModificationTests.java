@@ -14,12 +14,12 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification(){
 
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+        app.goTo().groupPage();
+        if (! app.group().isThereAGroup()){
+            app.group().create(new GroupData("test1", "test2", "test3"));
         }
 
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
         if(! app.getContactHelper().isThereAContact()){
             app.getContactHelper().createContact(new ContactData("First Name", "Last Name", "test1"));
         }
@@ -30,7 +30,7 @@ public class ContactModificationTests extends TestBase {
         ContactData contact = new ContactData("First Name Edited", "Last Name Edited", null);
         app .getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactMofication();
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 

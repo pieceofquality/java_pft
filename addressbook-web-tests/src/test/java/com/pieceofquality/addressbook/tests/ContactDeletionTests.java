@@ -12,11 +12,11 @@ public class ContactDeletionTests extends TestBase{
 
     @Test
     public void testContactDeletion(){
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
+        app.goTo().groupPage();
+        if (! app.group().isThereAGroup()){
+            app.group().create(new GroupData("Test1", "Test2", "Test3"));
         }
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
 
         if(! app.getContactHelper().isThereAContact()){
             ContactData contact = new ContactData("First Name", "Last Name", "test1");
@@ -28,7 +28,7 @@ public class ContactDeletionTests extends TestBase{
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContact();
         app.getContactHelper().accept();
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() -1);
 

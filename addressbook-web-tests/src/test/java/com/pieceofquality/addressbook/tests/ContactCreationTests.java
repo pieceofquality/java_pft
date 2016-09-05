@@ -1,6 +1,5 @@
 package com.pieceofquality.addressbook.tests;
 
-import com.pieceofquality.addressbook.appmanager.NavigationHelper;
 import com.pieceofquality.addressbook.model.ContactData;
 import com.pieceofquality.addressbook.model.GroupData;
 import org.testng.Assert;
@@ -14,15 +13,15 @@ public class ContactCreationTests extends TestBase{
     @Test
     public void testContactCreation() {
 
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+        app.goTo().groupPage();
+        if (! app.group().isThereAGroup()){
+            app.group().create(new GroupData("test1", "test2", "test3"));
         }
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
         ContactData contact = new ContactData("First Name", "Last Name", "test1");
         app.getContactHelper().createContact(contact);
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
         

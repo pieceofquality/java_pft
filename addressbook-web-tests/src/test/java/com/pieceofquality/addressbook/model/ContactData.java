@@ -4,6 +4,7 @@ public class ContactData {
     private final String firstName;
     private final String lastName;
     private String group;
+    private int id;
 
     public ContactData(String firstName, String lastName, String group) {
         this.firstName = firstName;
@@ -21,5 +22,9 @@ public class ContactData {
 
     public String getGroup() {
         return group;
+    }
+
+    public int getId() {
+        return id;
     }
 }

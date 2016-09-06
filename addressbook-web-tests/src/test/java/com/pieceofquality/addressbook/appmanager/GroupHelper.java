@@ -1,6 +1,7 @@
 package com.pieceofquality.addressbook.appmanager;
 
 import com.pieceofquality.addressbook.model.GroupData;
+import com.pieceofquality.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -77,14 +78,14 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
+    public Groups all() {
+        Set<GroupData> groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             groups.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return (Groups) groups;
     }
 }

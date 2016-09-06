@@ -1,6 +1,7 @@
 package com.pieceofquality.addressbook.tests;
 
 import com.pieceofquality.addressbook.model.GroupData;
+import com.pieceofquality.addressbook.model.Groups;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,6 +9,9 @@ import org.testng.annotations.Test;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase{
 
@@ -21,17 +25,18 @@ public class GroupModificationTests extends TestBase{
 
     @Test
     public void testGroupModification(){
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
         app.group().modify(group);
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(modifiedGroup);
         before.add(group);
         Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
     }
 
 

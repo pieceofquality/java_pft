@@ -1,27 +1,25 @@
 package com.pieceofquality.addressbook.tests;
 
 import com.pieceofquality.addressbook.model.GroupData;
-import org.testng.Assert;
+import com.pieceofquality.addressbook.model.Groups;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
     @Test
     public void testGroupCreation() {
         app.goTo().groupPage();
-        Set<GroupData> before = app.group().all();
+        Groups before = (Groups) app.group().all();
         GroupData group = new GroupData().withName("test1");
         app.group().create(group);
-        Set<GroupData> after = app.group().all();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        Groups after = (Groups) app.group().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
 
-        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-        before.add(group);
-        Assert.assertEquals(before,after);
+        assertThat(after, equalTo(
+                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
 }

@@ -1,44 +1,43 @@
 package com.pieceofquality.addressbook.tests;
 
 import com.pieceofquality.addressbook.model.ContactData;
+import com.pieceofquality.addressbook.model.Contacts;
 import com.pieceofquality.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 
 public class ContactModificationTests extends TestBase {
 
-    @Test
-    public void testContactModification(){
+    @BeforeMethod
+    public void ensurePreconditions() {
 
         app.goTo().groupPage();
-        if (! app.group().isThereAGroup()){
-            app.group().create(new GroupData("test1", "test2", "test3"));
+        if (app.group().all().size() == 0) {
+            app.group().create(new GroupData().withName("test1"));
         }
 
-        app.goTo().goToHomePage();
-        if(! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData("First Name", "Last Name", "test1"));
+        app.goTo().homePage();
+        if (app.contact().all().size() == 0) {
+            app.contact().create(new ContactData()
+                    .withFirstName("First Name").withLastName("Last Name").withGroup("test1"));
         }
+    }
 
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() -1);
-        app.getContactHelper().initContactModification();
-        ContactData contact = new ContactData("First Name Edited", "Last Name Edited", null);
-        app .getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactMofication();
-        app.goTo().returnToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size());
-
-        before.remove(before.size() - 1);
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
+    @Test
+    public void testContactModification(){
+            Contacts before = app.contact().all();
+            ContactData modifiedContact = before.iterator().next();
+            ContactData contact = new ContactData()
+                    .withId(modifiedContact.getId()).withFirstName("fname").withLastName("lname");
+            app.contact().modify(contact);
+            Contacts after = app.contact().all();
+            assertEquals(after.size(), before.size());
     }
 }

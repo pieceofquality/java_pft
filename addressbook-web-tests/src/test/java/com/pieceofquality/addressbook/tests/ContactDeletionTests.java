@@ -14,7 +14,7 @@ public class ContactDeletionTests extends TestBase{
     public void testContactDeletion(){
         app.goTo().groupPage();
         if (! app.group().isThereAGroup()){
-            app.group().create(new GroupData("Test1", "Test2", "Test3"));
+            app.group().create(new GroupData("test1", "test2", "test3"));
         }
         app.goTo().goToHomePage();
 

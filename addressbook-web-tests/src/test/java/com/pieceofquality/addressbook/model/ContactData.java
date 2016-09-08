@@ -1,8 +1,12 @@
 package com.pieceofquality.addressbook.model;
 
 public class ContactData {
+
     private String firstName;
     private String lastName;
+    private String homenumber;
+    private String mobilenumber;
+    private String worknumber;
     private String group;
     private int id = Integer.MAX_VALUE;
 
@@ -36,6 +40,18 @@ public class ContactData {
 
     public String getGroup() {
         return group;
+    }
+
+    public String getHomePhone() {
+        return homenumber;
+    }
+
+    public String getMobilePhone() {
+        return mobilenumber;
+    }
+
+    public String getWorkPhone() {
+        return worknumber;
     }
 
     @Override

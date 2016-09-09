@@ -23,8 +23,8 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("home"));
     }
 
-    public void homePage(){
-        if (isElementPresent(By.id("maintable"))){
+    public void homePage() {
+        if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));

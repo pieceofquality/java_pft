@@ -147,4 +147,14 @@ public class ContactHelper extends HelperBase {
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
+
+    public ContactData contactInfo(ContactData contact) {
+        initContactInfoById(contact.getId());
+        String info = wd.findElement(By.cssSelector("div#content")).getText();
+        return new ContactData().withId(contact.getId()).withInfo(info);
+    }
+
+    private void initContactInfoById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s", id))).click();
+    }
 }

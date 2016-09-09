@@ -16,6 +16,7 @@ public class ContactData {
     private String email3;
     private String address;
     private String contactAddress;
+    private String info;
 
     public String getContactAddress(){
         return contactAddress;
@@ -164,4 +165,12 @@ public class ContactData {
                 '}';
     }
 
+    public String getInfo() {
+        return info;
+    }
+
+    public ContactData withInfo (String info){
+        this.info = info;
+        return this;
+    }
 }

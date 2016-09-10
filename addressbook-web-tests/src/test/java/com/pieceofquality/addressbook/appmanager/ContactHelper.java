@@ -31,6 +31,7 @@ public class ContactHelper extends HelperBase {
         type("email", contactData.getEmail1());
         type("email2", contactData.getEmail2());
         type("email3", contactData.getEmail3());
+        attach("photo", contactData.getPhoto());
 
 
         if (creation) {

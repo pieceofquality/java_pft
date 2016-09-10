@@ -1,5 +1,7 @@
 package com.pieceofquality.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
 
     private String firstName;
@@ -17,6 +19,17 @@ public class ContactData {
     private String address;
     private String contactAddress;
     private String info;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    private File photo;
 
     public String getContactAddress(){
         return contactAddress;

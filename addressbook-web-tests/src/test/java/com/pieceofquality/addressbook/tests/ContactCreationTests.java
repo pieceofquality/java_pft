@@ -7,6 +7,8 @@ import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,8 +19,9 @@ public class ContactCreationTests extends TestBase{
         app.goTo().homePage();
         Contacts before = app.contact().all();
         app.goTo().contactPage();
+        File photo = new File("src/test/resources/picture.gif");
         ContactData contact = new ContactData()
-                .withFirstName("First Name").withLastName("Last Name").withGroup("test1");
+                .withFirstName("First Name").withLastName("Last Name").withPhoto(photo).withGroup("test1");
         app.contact().create(contact);
         app.goTo().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() +1));
@@ -27,18 +30,4 @@ public class ContactCreationTests extends TestBase{
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
     }
-
-    @Test
-    public void testBadAddressCreation() {
-        app.goTo().homePage();
-        Contacts before = app.contact().all();
-        app.goTo().contactPage();
-        ContactData address = new ContactData().withFirstName("name'").withLastName("last").withGroup("test1");
-        app.contact().create(address);
-        app.goTo().homePage();
-        assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().all();
-        assertThat(after, equalTo(before));
-    }
-
 }

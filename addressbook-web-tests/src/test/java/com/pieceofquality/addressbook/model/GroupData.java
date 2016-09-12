@@ -1,13 +1,20 @@
 package com.pieceofquality.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 public class GroupData {
     public void setId(int id) {
         this.id = id;
     }
 
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String name;
+    @Expose
     private String header;
+   @Expose
     private String footer;
 
     public int getId() {

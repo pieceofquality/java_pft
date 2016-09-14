@@ -25,6 +25,7 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private String browser;
     private final Properties properties;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -67,4 +68,8 @@ public class ApplicationManager {
         return contactHelper;
     }
 
+    public DbHelper db() {
+
+        return dbHelper;
+    }
 }

@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.pieceofquality.addressbook.model.ContactData;
 import com.pieceofquality.addressbook.model.Contacts;
 import com.pieceofquality.addressbook.model.GroupData;
+import com.pieceofquality.addressbook.model.Groups;
 import com.thoughtworks.xstream.XStream;
 import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
@@ -63,27 +64,41 @@ public class ContactCreationTests extends TestBase{
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(";");
-            list.add(new Object[] {new ContactData().withFirstName(split[0]).withLastName(split[1]).withGroup("test1")});
+            list.add(new Object[] {new ContactData().withFirstname(split[0]).withLastname(split[1])});
             line = reader.readLine();
         }
         return list.iterator();
 
     }
 
-    @Test
-    public void testContactCreation() {
+    @Test(dataProvider = "validContactFromJson")
+    public void testContactCreation(ContactData contact) {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().contactPage();
-        File photo = new File("src/test/resources/picture.gif");
-        ContactData contact = new ContactData()
-                .withFirstName("First Name").withLastName("Last Name").withPhoto(photo).withGroup("test1");
         app.contact().create(contact);
         app.goTo().returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() +1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-
+        verifyContactListUI();
     }
+
+    @Test
+    public void testAddressCreationAddInGroup() {
+        Groups groups = app.db().groups();
+        app.goTo().homePage();
+        Contacts before = app.db().contacts();
+        app.goTo().contactPage();
+        ContactData address = new ContactData().withFirstname("name").withLastname("last").inGroup(groups.iterator().next());
+        app.contact().create(address);
+        app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size() +1));
+        Contacts after = app.db().contacts();
+        assertThat(after, equalTo(before.withAdded(
+                address.withId(after.stream().mapToInt((ad) -> ad.getId()).max().getAsInt()))));
+        verifyContactListUI();
+    }
+
 }

@@ -1,3 +1,5 @@
+package com.pieceofquality.sample;
+
 import net.webservicex.GeoIP;
 import net.webservicex.GeoIPService;
 import org.testng.annotations.Test;

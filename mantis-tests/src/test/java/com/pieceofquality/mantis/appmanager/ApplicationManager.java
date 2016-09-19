@@ -20,6 +20,11 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private AdminHelper adminHelper;
+  private UserHelper userHelper;
+  private DbHelper dbHelper;
+  private JamesHelper jamesHelper;
+  private SoapHelper soapHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -55,13 +60,6 @@ public class ApplicationManager {
     return registrationHelper;
   }
 
-  public FtpHelper ftp() {
-    if (ftp == null){
-      ftp = new FtpHelper(this);
-    }
-    return ftp;
-  }
-
   public WebDriver getDriver() {
     if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -78,10 +76,52 @@ public class ApplicationManager {
     return wd;
   }
 
+  public FtpHelper ftp() {
+    if (ftp == null) {
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
+  }
+
   public MailHelper mail() {
     if (mailHelper == null) {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
+  }
+
+  public AdminHelper admin() {
+    if (adminHelper == null) {
+      adminHelper = new AdminHelper(this);
+    }
+    return adminHelper;
+  }
+
+  public UserHelper user() {
+    if (userHelper == null) {
+      userHelper = new UserHelper(this);
+    }
+    return userHelper;
+  }
+
+  public JamesHelper james() {
+    if (jamesHelper == null) {
+      jamesHelper = new JamesHelper(this);
+    }
+    return jamesHelper;
+  }
+
+  public DbHelper db() {
+    if (dbHelper == null) {
+      dbHelper = new DbHelper();
+    }
+    return dbHelper;
+  }
+
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
   }
 }

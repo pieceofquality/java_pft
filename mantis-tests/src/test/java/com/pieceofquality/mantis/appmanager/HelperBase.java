@@ -35,4 +35,12 @@ public class HelperBase {
       wd.findElement(locator).sendKeys(file.getAbsolutePath());
     }
   }
+
+  protected void login(String username, String password) {
+    wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
+    type(By.name("username"), username);
+    type(By.name("password"), password);
+    click(By.cssSelector("input[value='Login']"));
+  }
+
 }

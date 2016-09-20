@@ -38,4 +38,8 @@ dependencies {
             systemProperty 'target', "${target}"
         }
     }
+
+    test {
+        useTestNG()
+    }
 }

@@ -190,12 +190,12 @@ public class ContactData {
         return new Groups(groups);
     }
 
-    public ContactData withFirstname(String firstname) {
+    public ContactData withFirstName(String firstname) {
         this.firstname = firstname;
         return this;
     }
 
-    public ContactData withLastname(String lastname) {
+    public ContactData withLastName(String lastname) {
         this.lastname = lastname;
         return this;
     }
@@ -224,12 +224,11 @@ public class ContactData {
     }
 
 
-
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastname;
     }
 
@@ -257,6 +256,11 @@ public class ContactData {
 
     public ContactData withEmail3(String email3) {
         this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 

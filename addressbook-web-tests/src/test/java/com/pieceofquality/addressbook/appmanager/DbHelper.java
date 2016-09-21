@@ -41,4 +41,13 @@ public class DbHelper {
     session.close();
     return new Contacts(result);
   }
+
+  public Groups groupsForContact(ContactData contact) {
+    Groups groupsForContact = groups();
+    Groups invalidGroups = contact.getGroups();
+    for (GroupData group : invalidGroups) {
+      groupsForContact = groupsForContact.without(group);
+    }
+    return groupsForContact;
+  }
 }

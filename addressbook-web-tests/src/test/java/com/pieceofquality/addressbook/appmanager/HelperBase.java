@@ -1,9 +1,6 @@
 package com.pieceofquality.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -33,6 +30,10 @@ public class HelperBase {
             wd.findElement(By.name(locator)).sendKeys(file.getAbsolutePath());
             }
         }
+
+    public WebElement findElement(By locator) {
+        return wd.findElement(locator);
+    }
 
     protected void click(By locator) {
         wd.findElement(locator).click();

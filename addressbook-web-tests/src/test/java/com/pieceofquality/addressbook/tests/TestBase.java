@@ -6,9 +6,7 @@ import com.pieceofquality.addressbook.model.Contacts;
 import com.pieceofquality.addressbook.model.GroupData;
 import com.pieceofquality.addressbook.model.Groups;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.util.stream.Collectors;
@@ -47,7 +45,7 @@ public class TestBase {
             Contacts dbContact = app.db().contacts();
             Contacts uiContact = app.contact().all();
             assertThat(uiContact, equalTo(dbContact.stream().map((c) -> new ContactData()
-                    .withId(c.getId()).withFirstname(c.getFirstname()).withLastname(c.getLastname()))
+                    .withId(c.getId()).withFirstName(c.getFirstName()).withLastName(c.getLastName()))
                     .collect(Collectors.toSet())));
         }
     }

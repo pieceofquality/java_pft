@@ -2,6 +2,7 @@ package com.pieceofquality.addressbook.appmanager;
 
 import com.pieceofquality.addressbook.model.ContactData;
 import com.pieceofquality.addressbook.model.Contacts;
+import com.pieceofquality.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,8 +23,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
-        type("firstname", contactData.getFirstname());
-        type("lastname", contactData.getLastname());
+        type("firstname", contactData.getFirstName());
+        type("lastname", contactData.getLastName());
         type("address", contactData.getAddress());
         type("home", contactData.getHomePhone());
         type("mobile", contactData.getMobilePhone());
@@ -115,7 +116,7 @@ public class ContactHelper extends HelperBase {
             String allPhones = cells.get(5).getText();
             String allEmails = cells.get(4).getText();
             String contactAddress = cells.get(3).getText();
-            contactCache.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
+            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
                     .withAllPhones(allPhones).withAllEmails(allEmails).withContactAddress(contactAddress));
         }
         return new Contacts(contactCache);
@@ -125,7 +126,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("//table[@id='maintable']//tr[2]"));
     }
 
-    public ContactData contactInfoFromEditForm(ContactData contact) {
+    public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
@@ -137,7 +138,7 @@ public class ContactHelper extends HelperBase {
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         String contactAddress = wd.findElement(By.name("address")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail1(email1).withEmail2(email2).withEmail3(email3)
                 .withContactAddress(contactAddress);
@@ -160,5 +161,24 @@ public class ContactHelper extends HelperBase {
 
     private void initContactInfoById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s", id))).click();
+    }
+
+    public ContactData contactInfoFromHomePage(ContactData contact) {
+        String allEmails = findElement(By.xpath(".//*[@id='" + contact.getId() + "']/../../td[5]")).getText();
+        String allPhones = findElement(By.xpath(".//*[@id='" + contact.getId() + "']/../../td[6]")).getText();
+        return contact.withAllEmails(allEmails).withAllPhones(allPhones);
+    }
+
+    public ContactData addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        new Select(findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+        click(By.cssSelector(".right>input[type='submit']"));
+        click(By.linkText("group page \"" + group.getName() + "\""));
+        return contact;
+    }
+
+    public String getDetailedInfo(ContactData contact) {
+        click(By.cssSelector("a[href=\"view.php?id=" + contact.getId() + "\"]"));
+        return findElement(By.id("content")).getText();
     }
 }

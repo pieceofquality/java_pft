@@ -2,13 +2,8 @@ package com.pieceofquality.addressbook.tests;
 
 import com.pieceofquality.addressbook.model.ContactData;
 import com.pieceofquality.addressbook.model.Contacts;
-import com.pieceofquality.addressbook.model.GroupData;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +19,7 @@ public class ContactDeletionTests extends TestBase{
         if(app.contact().all().size() == 0) {
             app.goTo().contactPage();
             app.contact().create(new ContactData()
-                    .withFirstname("name").withLastname("last"));
+                    .withFirstName("name").withLastName("last"));
         }
     }
 

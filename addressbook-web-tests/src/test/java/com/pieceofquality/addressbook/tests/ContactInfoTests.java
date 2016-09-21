@@ -22,8 +22,8 @@ public class ContactInfoTests extends TestBase {
         app.goTo().homePage();
         if (app.db().contacts().size() == 0) {
             app.contact().create(new ContactData()
-                    .withFirstName("fname").withLastName("lname").withAddress("test")
-                    .withEmail1("test1@test1.ru").withEmail2("test2@test2.ru").withEmail3("test3@test3.ru")
+                    .withFirstName("test").withLastName("test").withAddress("test")
+                    .withEmail1("mail1@test1.ru").withEmail2("mail2@test2.ru").withEmail3("mail3@test3.ru")
                     .withHomePhone("111").withMobilePhone("222").withWorkPhone("333"));
         }
     }

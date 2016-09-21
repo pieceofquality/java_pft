@@ -14,17 +14,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by piece on 10.09.2016.
  */
-public class ContactDetailedInfoTests extends TestBase{
-
+public class ContactDetailedInfoTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (!app.contact().isThereAContact()) {
+        if (!app.contact().isContactWithDetailedInfoPresent()) {
             app.contact().create(new ContactData()
-                    .withFirstName("Test").withLastName("Test")
-                    .withAddress("Test")
-                    .withHomePhone("11111").withMobilePhone("222").withWorkPhone("3332")
+                    .withFirstName("test").withLastName("test")
+                    .withAddress("test")
+                    .withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
                     .withEmail1("mail1@test1.ru").withEmail2("mail2@test2.ru").withEmail3("mail3@test3.ru"));
         }
     }

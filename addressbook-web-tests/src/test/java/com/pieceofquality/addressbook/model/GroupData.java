@@ -11,8 +11,8 @@ import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
-@Table(name = "group_list")
 
+@Table(name = "group_list")
 public class GroupData {
     @XStreamOmitField
     @Id
@@ -24,8 +24,8 @@ public class GroupData {
     private String name;
 
     @Expose
-    @Column(name = "group_header")
     @Type(type = "text")
+    @Column(name = "group_header")
     private String header;
 
     @Expose
@@ -40,8 +40,50 @@ public class GroupData {
         return new Contacts(contacts);
     }
 
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public GroupData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public String getFooter() {
+        return footer;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
+                '}';
     }
 
     @Override
@@ -66,46 +108,4 @@ public class GroupData {
         result = 31 * result + (footer != null ? footer.hashCode() : 0);
         return result;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getFooter() {
-        return footer;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-
-    }
-
-    public GroupData withId(int id) {
-        this.id = id;
-        return this;
-    }
-
-    public GroupData withName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public GroupData withHeader(String header) {
-        this.header = header;
-        return this;
-    }
-
-    public GroupData withFooter(String footer) {
-        this.footer = footer;
-        return this;
-    }
-
 }

@@ -1,7 +1,9 @@
 package com.pieceofquality.addressbook.appmanager;
 
+import com.pieceofquality.addressbook.model.GroupData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 
@@ -60,5 +62,9 @@ public class HelperBase {
         }   catch (NoSuchElementException ex){
             return false;
         }
+    }
+
+    protected void viewGroupMembers(GroupData group) {
+        new Select(findElement(By.cssSelector("#right>select"))).selectByVisibleText(group.getName());
     }
 }

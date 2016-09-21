@@ -181,4 +181,12 @@ public class ContactHelper extends HelperBase {
         click(By.cssSelector("a[href=\"view.php?id=" + contact.getId() + "\"]"));
         return findElement(By.id("content")).getText();
     }
+
+    public ContactData removeContact(ContactData contact, GroupData group) {
+        viewGroupMembers(group);
+        selectContactById(contact.getId());
+        click(By.name("remove"));
+        returnToHomePage();
+        return contact;
+    }
 }

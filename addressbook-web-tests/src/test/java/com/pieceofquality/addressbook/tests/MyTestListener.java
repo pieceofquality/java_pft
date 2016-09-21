@@ -3,7 +3,7 @@ package com.pieceofquality.addressbook.tests;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import ru.vitali.pft.addressbook.appmanager.ApplicationManager;
+import com.pieceofquality.addressbook.appmanager.ApplicationManager;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class MyTestListener implements ITestListener {
